@@ -5,19 +5,29 @@
         <label>Password: </label>
         <input type="password" required v-model="password" autocomplete="off">
         <button> Login </button>
+        <hr>
+        <button type="button" class="button" @click="startRegister">Create new account</button>
     </form>
+    <div class="reg" v-if="register">
+        <Register @close="startRegister" />
+    </div>
 </template>
 
 <script>
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import Register from './Register.vue'
 
 export default {
     data() {
         return{
             email: '',
-            password: ''
+            password: '',
+            register: false
         }
+    },
+    components: {
+        Register
     },
     methods: {
         Login() {
@@ -27,6 +37,9 @@ export default {
             
             this.email = ''
             this.password = ''
+        },
+        startRegister() {
+            this.register = !this.register
         }
     }
 }
@@ -66,5 +79,14 @@ button {
         margin-top: 20px;
         color: white;
         border-radius: 5px;
+        width: 100%;
+    }
+hr  {
+        margin-top: 15px;
+        border: 1px solid rgb(184, 183, 183)
+    }
+.button {
+        margin-top: 10px;
+        background: violet ;
     }
 </style>
