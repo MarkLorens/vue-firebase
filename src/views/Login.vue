@@ -4,6 +4,9 @@
         <input type="email" required v-model="email">
         <label>Password: </label>
         <input type="password" required v-model="password" autocomplete="off">
+        <div class="err">
+            {{ msg }}
+        </div> 
         <button> Login </button>
         <hr>
         <button type="button" class="button" @click="startRegister">Create new account</button>
@@ -23,7 +26,8 @@ export default {
         return{
             email: '',
             password: '',
-            register: false
+            register: false,
+            msg: ''
         }
     },
     components: {
@@ -32,8 +36,8 @@ export default {
     methods: {
         Login() {
             firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-                .then(data => console.log(data))
-                .catch(err => console.log(err.message))
+                .then(alert("Logged in"))
+                .catch(err => this.msg = "Incorrect email or password")
             
             this.email = ''
             this.password = ''
@@ -69,7 +73,7 @@ input{
         width: 100%;
         box-sizing: border-box;
         border: none;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid black;
         color: #555;
     }
 button {
@@ -89,4 +93,9 @@ hr  {
         margin-top: 10px;
         background: violet ;
     }
+.err {
+    color: red;
+    margin-top: 10px;
+    font-weight: bold;
+}
 </style>
