@@ -5,8 +5,12 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import Navbar from './components/Navbar.vue'
 
 export default {
+  components: {
+    Navbar
+  },
   beforeMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if(!user) {
@@ -30,5 +34,7 @@ export default {
 }
 body {
   background: #eee;
+  margin: 0;
+  padding: 0;
 }
 </style>

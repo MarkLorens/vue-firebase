@@ -36,7 +36,6 @@ export default {
     methods: {
         Login() {
             firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-                .then(alert("Logged in"))
                 .catch(err => this.msg = "Incorrect email or password")
             
             this.email = ''

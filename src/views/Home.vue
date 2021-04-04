@@ -1,22 +1,14 @@
 <template>
-    <button @click="Logout">Logout</button>
-    <div class="home">
-      Home
-    </div>
+    <Navbar />
 </template>
 
 <script>
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import Navbar from '../components/Navbar.vue'
 
 export default {
   name: 'Home',
-  methods: {
-    Logout(){
-      firebase.auth().signOut()
-        .then(alert('Signed Out'))
-        .catch(err => console.log(err.message))
-    }
+  components: {
+    Navbar
   }
 }
 </script>
