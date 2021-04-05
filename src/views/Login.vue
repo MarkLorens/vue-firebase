@@ -1,4 +1,10 @@
 <template>
+    <div class="dropdown">
+        <a class="dropbtn"><i class="arrow right" style="float:left" @click="autoFill"></i> </a>
+          <div class="dropdown-content">
+            <p>Please register a new account or click the arrow button </p>
+          </div>
+    </div>
     <form @submit.prevent="Login">
         <label>Email: </label>
         <input type="email" required v-model="email">
@@ -46,6 +52,11 @@ export default {
         },
         startRegister() {
             this.register = !this.register
+        },
+        autoFill() {
+            this.email = 'test@test.com'
+            this.password = 'password1234'
+            console.log('hit');
         }
     }
 }
@@ -99,5 +110,44 @@ hr  {
     color: red;
     margin-top: 10px;
     font-weight: bold;
+}
+.arrow {
+  border: solid violet;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;;
+}
+.arrow:hover {
+    cursor: pointer;
+}
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  margin-left: 30px;
+  background: #0b5dff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content p {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown-content a:hover{
+  background: #111;
+  color: white;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown {
+    margin-left: 10px;
 }
 </style>
