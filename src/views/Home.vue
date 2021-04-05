@@ -1,12 +1,27 @@
 <template>
   <Navbar />
-  <form @submit.prevent="addInput">
-    <input type="text" v-model="input">
-    <button>Submit</button>
-  </form>
-  <div class="content" v-for="data in returnedData" :key="data.content">
-    {{ data }}
-  </div>
+  <template v-if="adding">
+    <form @submit.prevent="addInput">
+      <label>Your new input</label>
+      <input type="text" v-model="input">
+      <button class="Add">Submit</button>
+    </form>
+  </template>
+  <template v-else>
+    <div class="content">
+      <table>
+        <tr>
+          <th>Input</th>
+          <th>Time</th>
+        </tr>
+        <tr v-for="data in returnedData" :key="data.content">
+          <td>{{ data.content }}</td>
+          <td>{{ data.entryTime }} </td>
+        </tr>
+      </table>
+      <button class="Add" @click="startAdding">Add More</button>
+    </div>
+  </template>
 </template> 
 
 <script>
@@ -25,7 +40,7 @@ export default {
       returnedData: [],
       input: '',
       name: '',
-      isUser: false
+      adding: false
     }
   },
   mounted() {
@@ -60,8 +75,12 @@ export default {
       updates['/UserInput/' + newKey] = postData
       this.input = ''
       this.returnedData = []
-
+      this.adding = false
+      
       return firebase.database().ref().update(updates)
+    },
+    startAdding() {
+      this.adding=true
     }
   }
 }
@@ -69,7 +88,53 @@ export default {
 
 <style scoped>
 input {
-  border: 1px solid black;
+  border-bottom: 1px solid black;
   size: 5px;
+}
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  padding: 8px;
+  margin: 0 auto;
+  width: 50%;
+  margin-top: 30px;
+}
+tr:nth-child(even):hover{
+  background: black;
+  color: white;
+}
+tr:hover {
+  background: #eee;
+  color: black;
+}
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+tr:nth-child(even){background-color: #0b5dff; color: white;}
+tr {
+  background: violet;
+  color: white;
+}
+.content {
+  width: 100%;
+  height: 100%;
+}
+.Add {
+  width:30%;
+  background: #4CAF50;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.Add:hover{
+  cursor: pointer;
+}
+label {
+  margin-top: -10px;
+  font-size: 1.1em;
+  text-transform: none;
 }
 </style>
