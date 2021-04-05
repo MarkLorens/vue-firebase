@@ -76,7 +76,7 @@ export default {
       this.input = ''
       this.returnedData = []
       this.adding = false
-      
+
       return firebase.database().ref().update(updates)
     },
     startAdding() {
@@ -110,7 +110,7 @@ tr:hover {
 th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
+  text-align: center;
   background-color: #4CAF50;
   color: white;
 }

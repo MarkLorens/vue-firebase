@@ -32,6 +32,9 @@ export default {
         },
         Register() {
             firebase.auth().createUserWithEmailAndPassword(this.email,this.password)
+                .then((user) => {
+                    localStorage.setItem('userName', user.user.email)
+                })
                 .then(alert("User " + this.email + " was created"))
                 .catch(err => console.log(err.message))
         }
