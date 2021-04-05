@@ -3,6 +3,7 @@
         <li><a href="#">Home?</a></li>
         <li><a href="#">Somewhere maybe</a></li>
         <li style="float:right"><a @click="Logout">Logout</a></li>
+        <li style="float:right"><a href="#">{{ user }}</a></li>
     </ul>
 </template>
 
@@ -11,12 +12,19 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 export default {
-    methods: {
-        Logout(){
-        firebase.auth().signOut()
-            .then(alert('Signed Out'))
-            .catch(err => console.log(err.message))
-        }
+  data() {
+    return {
+      user: localStorage.getItem('userName')
+    }
+  },
+  methods: {
+    Logout(){
+      firebase.auth().signOut()
+        .then(alert('Signed Out'))
+        .catch(err => console.log(err.message))
+        
+      localStorage.removeItem('userName')
+    }
   }
 }
 </script>
