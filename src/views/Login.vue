@@ -56,7 +56,8 @@ export default {
         autoFill() {
             this.email = 'test@test.com'
             this.password = 'password1234'
-            console.log('hit');
+            
+            this.Login()
         }
     }
 }

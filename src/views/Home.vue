@@ -163,5 +163,6 @@ label {
 }
 .action:hover {
   cursor: pointer;
+  color: crimson;
 }
 </style>
